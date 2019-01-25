@@ -27,7 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'author_id',
+            // 'author.name',
+            [    'attribute'=>'author_id',
+            'label'=>'Родительская категория',
+            'format'=>'text', // Возможные варианты: raw, html
+            'content'=>function($data){
+              return $data->getAuthorName();
+            },
+            // 'filter' => Book::getParentsList()
+          ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
