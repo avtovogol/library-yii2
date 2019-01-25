@@ -33,7 +33,7 @@ class Book extends \yii\db\ActiveRecord
             [['id', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 255],
             [['id'], 'unique'],
-            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAuthor::className(), 'targetAttribute' => ['author_id' => 'id']],
+            [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Author::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
 
@@ -54,6 +54,6 @@ class Book extends \yii\db\ActiveRecord
      */
     public function getAuthor()
     {
-        return $this->hasOne(TblAuthor::className(), ['id' => 'author_id']);
+        return $this->hasOne(Author::className(), ['id' => 'author_id']);
     }
 }
