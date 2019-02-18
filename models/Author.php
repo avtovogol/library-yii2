@@ -42,15 +42,22 @@ class Author extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Имя',
+            'CountBooks' => 'Количество книг',
+
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getTblBooks()
+    public function getBooks()
     {
-        return $this->hasMany(TblBook::className(), ['author_id' => 'id']);
+        return $this->hasMany(Book::className(), ['author_id' => 'id']);
+    }
+
+    public function getCountBooks()
+    {
+        return count($this->books);
     }
 }

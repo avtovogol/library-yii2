@@ -48,6 +48,15 @@ class BookSearch extends Book
             'query' => $query,
         ]);
 
+                // присоединяем зависимость `author` которая является связью с таблицей `users`
+        // и устанавливаем алиас таблицы в значение `author`
+        $query->joinWith(['author' => function($query) { $query->from(['author' => 'tbl_author']); }]);
+        // добавляем сортировку по колонке из зависимости
+        $dataProvider->sort->attributes['author.name'] = [
+            'asc' => ['author.name' => SORT_ASC],
+            'desc' => ['author.name' => SORT_DESC],
+        ];
+
         $this->load($params);
 
         if (!$this->validate()) {

@@ -27,9 +27,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            // 'author.name',
+            // 'author.name',// вариант без сортировки
             [    'attribute'=>'author_id',
-            'label'=>'Родительская категория',
+            'label'=>'Автор',
             'format'=>'text', // Возможные варианты: raw, html
             'content'=>function($data){
               return $data->getAuthorName();

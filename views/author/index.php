@@ -27,7 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'name',
-
+            'CountBooks',
+//            [    'attribute'=>'CountBooks',
+//                'label'=>'Количество книг   ',
+//                'format'=>'text', // Возможные варианты: raw, html
+//                'content'=>function($data){
+//                    return $data->getCountBooks();
+//                },
+//            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
