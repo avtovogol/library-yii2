@@ -74,7 +74,7 @@ class BookSearch extends Book
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            'tbl_book.id' => $this->id,
             'author_id' => $this->author_id,
         ]);
 
