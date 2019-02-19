@@ -19,7 +19,14 @@ class BookSearch extends Book
         return [
             [['id', 'author_id'], 'integer'],
             [['title'], 'safe'],
+            [['author.name'], 'safe'],
         ];
+    }
+
+    public function attributes()
+    {
+        // делаем поле зависимости доступным для поиска
+        return array_merge(parent::attributes(), ['author.name']);
     }
 
     /**
@@ -49,9 +56,9 @@ class BookSearch extends Book
         ]);
 
                 // присоединяем зависимость `author` которая является связью с таблицей `users`
-        // и устанавливаем алиас таблицы в значение `author`
+                // и устанавливаем алиас таблицы в значение `author`
         $query->joinWith(['author' => function($query) { $query->from(['author' => 'tbl_author']); }]);
-        // добавляем сортировку по колонке из зависимости
+                // добавляем сортировку по колонке из зависимости
         $dataProvider->sort->attributes['author.name'] = [
             'asc' => ['author.name' => SORT_ASC],
             'desc' => ['author.name' => SORT_DESC],
@@ -72,6 +79,7 @@ class BookSearch extends Book
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title]);
+        $query->andFilterWhere(['LIKE', 'author.name', $this->getAttribute('author.name')]);
 
         return $dataProvider;
     }
